@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85cbfb4c-0599-4ffc-bbbe-fb7b6c44269b" name="Default" comment="" />
+    <list default="true" id="85cbfb4c-0599-4ffc-bbbe-fb7b6c44269b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+    </list>
     <ignored path="flexible-dashboard.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="85cbfb4c-0599-4ffc-bbbe-fb7b6c44269b" time="1376140858534" ignored="false" />
-    <file path="/index.html" changelist="85cbfb4c-0599-4ffc-bbbe-fb7b6c44269b" time="1376142097516" ignored="false" />
+    <file path="/index.html" changelist="85cbfb4c-0599-4ffc-bbbe-fb7b6c44269b" time="1376142861718" ignored="false" />
     <file path="/layout_helper_dashboard.js" changelist="85cbfb4c-0599-4ffc-bbbe-fb7b6c44269b" time="1376142075461" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,8 +31,10 @@
       <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="45" selection-start="1085" selection-end="1085" vertical-scroll-proportion="0.67862713">
-              <folding />
+            <state line="3" column="21" selection-start="55" selection-end="55" vertical-scroll-proportion="0.070202805">
+              <folding>
+                <element signature="n#style#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -295,8 +299,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="45" selection-start="1085" selection-end="1085" vertical-scroll-proportion="0.67862713">
-          <folding />
+        <state line="3" column="21" selection-start="55" selection-end="55" vertical-scroll-proportion="0.070202805">
+          <folding>
+            <element signature="n#style#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
