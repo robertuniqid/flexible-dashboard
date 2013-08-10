@@ -166,11 +166,6 @@ var LayoutHelperDashboard = {
 
     triggerEffect = typeof triggerEffect == "undefined" ? false : triggerEffect;
 
-    if(elementObject.attr('data-reset-width') == 1) {
-      elementObject.removeAttr('width');
-      elementObject.removeAttr('height');
-    }
-
     if(typeof elementObject.attr('data-base-content') != "undefined")
       elementObject.html(decodeURI(elementObject.attr('data-base-content')));
 
@@ -201,10 +196,6 @@ var LayoutHelperDashboard = {
     elementObject.addClass('animated ' + elementObject.attr('data-hover-effect'));
 
     if(typeof elementObject.attr('data-hover-content') != 'undefined') {
-      elementObject.width(elementObject.width());
-      elementObject.height(elementObject.height());
-
-      elementObject.attr('data-reset-width', 1);
       elementObject.html(decodeURI(elementObject.attr('data-hover-content')));
     }
 
