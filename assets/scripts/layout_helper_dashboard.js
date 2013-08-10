@@ -13,8 +13,10 @@ var LayoutHelperDashboard = {
     defaultColor          : ['#1abc9c', '#16a085', '#f1c40f', '#f39c12', '#2ecc71', '#27ae60', '#e67e22', '#d35400', '#3498db', '#2980b9', '#e74c3c', '#c0392b', '#9b59b6', '#8e44ad', '#34495e', '#2c3e50'],
     hoverTextColor        : '#ffffff',
     backgroundColor       : '#393939',
-    hoverEffect           : 'pulse',
-    hoverEffectDuration   : 1000,
+    hoverEffect                    : 'pulse',
+    hoverEffectDuration            : 1000,
+    hoverEffectWithContent         : 'flipInY',
+    hoverEffectWithContentDuration : 1500,
     minMarginX : 10,
     maxMarginX : 50,
     minMarginY : 10,
@@ -134,32 +136,54 @@ var LayoutHelperDashboard = {
         backgroundColor= typeof elementInformation.backgroundColor == "undefined" ? this._fetchDefaultBackgroundColor() : elementInformation.backgroundColor,
         hoverTextColor = typeof elementInformation.hoverTextColor == "undefined" ? this._fetchDefaultHoverTextColor() : elementInformation.hoverTextColor;
 
-    var html = '';
+    var html = '',
+        elementContent = '<a href="' + elementInformation.link + '">' +
+                          '<span class="entypo">' +
+                          (
+                              typeof elementInformation.entypo == "undefined"
+                                  ? this._options.defaultEntypo : elementInformation.entypo
+                              ) +
+                          '</span>' +
+                          '<span>' + elementInformation.name + '</span>' +
+                         '</a>';
 
     html = '<section class="element-' + group_index + ' element ' +
               (typeof elementInformation.class == "undefined" ? '' : elementInformation.class) + '"' +
               'data-color="' + color + '"' +
+              'data-base-content="' + encodeURI(elementContent) + '"' +
               'data-background-color="' + backgroundColor + '"' +
+              'data-hover-effect="' + (typeof elementInformation.hover_content == "undefined" ? this._options.hoverEffect : this._options.hoverEffectWithContent) + '"' +
+              'data-hover-effect-duration="' + (typeof elementInformation.hover_content == "undefined" ? this._options.hoverEffectDuration : this._options.hoverEffectWithContentDuration) + '"' +
               'data-hover-text-color="' + hoverTextColor + '"' +
-             '><a href="' + elementInformation.link + '">' +
-                 '<span class="entypo">' +
-                 (
-                     typeof elementInformation.entypo == "undefined"
-                         ? this._options.defaultEntypo : elementInformation.entypo
-                     ) +
-                 '</span>' +
-                '<span>' + elementInformation.name + '</span>' +
-              '</a>' +
-           '</section>';
+              (typeof elementInformation.hover_content != "undefined" ? 'data-hover-content="' + encodeURI(elementInformation.hover_content) + '"' : '')+
+             '>' + elementContent + '</section>';
 
     return html;
   },
 
-  _setDefaultStateDashboardElementHTMLAtIndex : function(index) {
+  _setDefaultStateDashboardElementHTMLAtIndex : function(index, triggerEffect) {
     var elementObject = typeof index == "object" ? index : this._dashboardObjectElementsContainer.find('> .element-' + index);
+
+    triggerEffect = typeof triggerEffect == "undefined" ? false : triggerEffect;
+
+    if(elementObject.attr('data-reset-width') == 1) {
+      elementObject.removeAttr('width');
+      elementObject.removeAttr('height');
+    }
+
+    if(typeof elementObject.attr('data-base-content') != "undefined")
+      elementObject.html(decodeURI(elementObject.attr('data-base-content')));
 
     elementObject.find('> a > span').css('color', elementObject.attr('data-color'));
     elementObject.css('background-color', elementObject.attr('data-background-color'));
+
+    if(triggerEffect) {
+      elementObject.removeClass('animated ' + elementObject.attr('data-assigned-effect'));
+      elementObject.removeAttr('data-assigned-effect');
+
+      elementObject.attr('data-assigned-effect', elementObject.attr('data-hover-effect'));
+      elementObject.addClass('animated ' + elementObject.attr('data-hover-effect'));
+    }
   },
 
   _setHoverStateDashboardElementHTMLAtIndex : function(index) {
@@ -173,13 +197,21 @@ var LayoutHelperDashboard = {
       elementObject.removeAttr('data-assigned-effect');
     }
 
-    elementObject.attr('data-assigned-effect', this._options.hoverEffect);
-    elementObject.addClass('animated ' + this._options.hoverEffect);
+    elementObject.attr('data-assigned-effect', elementObject.attr('data-hover-effect'));
+    elementObject.addClass('animated ' + elementObject.attr('data-hover-effect'));
+
+    if(typeof elementObject.attr('data-hover-content') != 'undefined') {
+      elementObject.width(elementObject.width());
+      elementObject.height(elementObject.height());
+
+      elementObject.attr('data-reset-width', 1);
+      elementObject.html(decodeURI(elementObject.attr('data-hover-content')));
+    }
 
     setTimeout(function(){
       elementObject.removeClass('animated ' + elementObject.attr('data-assigned-effect'));
       elementObject.removeAttr('data-assigned-effect');
-    }, this._options.hoverEffectDuration);
+    }, elementObject.attr('data-hover-effect-duration'));
   },
 
   _assignDashboardElementsTriggers : function() {
@@ -188,7 +220,7 @@ var LayoutHelperDashboard = {
     this._dashboardObjectElementsContainer.find('> .element').hover(function(){
       objectInstance._setHoverStateDashboardElementHTMLAtIndex($(this));
     }, function(){
-      objectInstance._setDefaultStateDashboardElementHTMLAtIndex($(this));
+      objectInstance._setDefaultStateDashboardElementHTMLAtIndex($(this), true);
     });
   },
 
