@@ -8,14 +8,14 @@ var LayoutHelperDashboard = {
   layoutBodyObject   : null,
   _options           : {
     container             : null,
-    elementEffectIn       : ['fadeInUp', 'fadeInRight', 'fadeInDown', 'fadeInLeft'],//['bounceInUp', 'bounceInRight', 'bounceInDown', 'bounceInLeft']
+    elementEffectIn       : 'rollIn',//['fadeInUp', 'fadeInRight', 'fadeInDown', 'fadeInLeft'],//['bounceInUp', 'bounceInRight', 'bounceInDown', 'bounceInLeft']
     defaultEntypo         : '&#128196;',
     defaultColor          : ['#1abc9c', '#16a085', '#f1c40f', '#f39c12', '#2ecc71', '#27ae60', '#e67e22', '#d35400', '#3498db', '#2980b9', '#e74c3c', '#c0392b', '#9b59b6', '#8e44ad', '#34495e', '#2c3e50'],
     hoverTextColor        : '#ffffff',
     backgroundColor       : '#393939',
     hoverEffect                    : 'pulse',
     hoverEffectDuration            : 1000,
-    hoverEffectWithContent         : 'flipInY',
+    hoverEffectWithContent         : 'flipInY',// Flip
     hoverEffectWithContentDuration : 1500,
     minMarginX : 10,
     maxMarginX : 50,
